@@ -1,0 +1,208 @@
+{
+  "project": {
+    "name": "ASTRA FIGHTERS",
+    "version": "1.0.0",
+    "engine": "Phaser 3",
+    "platform": [
+      "HTML5",
+      "Android WebView"
+    ],
+    "orientation": "landscape",
+    "offlineReady": true
+  },
+  "match": {
+    "mode": "local-two-player",
+    "rounds": 3,
+    "roundTimerSeconds": 60,
+    "startingHealth": 200,
+    "startingStamina": 100,
+    "pointsPerRoundWin": 5,
+    "maximumMatchPoints": 15
+  },
+  "damage": {
+    "lightPunch": 8,
+    "heavyPunch": 15,
+    "lightKick": 10,
+    "heavyKick": 18,
+    "jumpAttack": 14,
+    "specialAttack": 25,
+    "comboFinisher": 30
+  },
+  "stamina": {
+    "minimum": 0,
+    "maximum": 100,
+    "runningDrainPerSecond": 18,
+    "heavyPunchCost": 7,
+    "heavyKickCost": 10,
+    "specialAttackCost": 28,
+    "idleRegenerationPerSecond": 15,
+    "movingRegenerationPerSecond": 4
+  },
+  "controls": {
+    "player1": {
+      "move": [
+        "up",
+        "down",
+        "left",
+        "right"
+      ],
+      "buttons": {
+        "square": "lightPunch",
+        "triangle": "heavyPunch",
+        "cross": "lightKick",
+        "circle": "heavyKick"
+      }
+    },
+    "player2": {
+      "move": [
+        "up",
+        "down",
+        "left",
+        "right"
+      ],
+      "buttons": {
+        "square": "lightPunch",
+        "triangle": "heavyPunch",
+        "cross": "lightKick",
+        "circle": "heavyKick"
+      }
+    },
+    "multiTouch": true,
+    "joystickDirections": 8
+  },
+  "characters": [
+    {
+      "id": "nova",
+      "name": "NOVA",
+      "style": "Balanced martial arts",
+      "attack": 7,
+      "speed": 8,
+      "defense": 7,
+      "special": "Prism Strike"
+    },
+    {
+      "id": "volt",
+      "name": "VOLT",
+      "style": "Kickboxing",
+      "attack": 8,
+      "speed": 9,
+      "defense": 6,
+      "special": "Thunder Rush"
+    },
+    {
+      "id": "orion",
+      "name": "ORION",
+      "style": "Karate",
+      "attack": 8,
+      "speed": 7,
+      "defense": 8,
+      "special": "Meteor Fist"
+    },
+    {
+      "id": "lyra",
+      "name": "LYRA",
+      "style": "Taekwondo",
+      "attack": 7,
+      "speed": 10,
+      "defense": 6,
+      "special": "Sky Arc"
+    },
+    {
+      "id": "kairo",
+      "name": "KAIRO",
+      "style": "Jeet Kune Do",
+      "attack": 8,
+      "speed": 9,
+      "defense": 7,
+      "special": "Rapid Pulse"
+    },
+    {
+      "id": "ember",
+      "name": "EMBER",
+      "style": "Muay Thai",
+      "attack": 9,
+      "speed": 7,
+      "defense": 7,
+      "special": "Blazing Elbow"
+    },
+    {
+      "id": "zenith",
+      "name": "ZENITH",
+      "style": "Wushu",
+      "attack": 7,
+      "speed": 9,
+      "defense": 7,
+      "special": "Wind Spiral"
+    },
+    {
+      "id": "mira",
+      "name": "MIRA",
+      "style": "Capoeira",
+      "attack": 7,
+      "speed": 9,
+      "defense": 8,
+      "special": "Comet Sweep"
+    },
+    {
+      "id": "titan",
+      "name": "TITAN",
+      "style": "Power wrestling",
+      "attack": 10,
+      "speed": 5,
+      "defense": 10,
+      "special": "Ground Breaker"
+    },
+    {
+      "id": "nyx",
+      "name": "NYX",
+      "style": "Ninja-inspired martial arts",
+      "attack": 8,
+      "speed": 10,
+      "defense": 5,
+      "special": "Shadow Flash"
+    }
+  ],
+  "arenas": [
+    {
+      "id": "neon-city",
+      "name": "Neon City",
+      "theme": "rainy neon rooftop"
+    },
+    {
+      "id": "ancient-temple",
+      "name": "Ancient Temple",
+      "theme": "stone ruins and torchlight"
+    },
+    {
+      "id": "japanese-dojo",
+      "name": "Japanese Dojo",
+      "theme": "traditional wooden hall"
+    },
+    {
+      "id": "mountain-arena",
+      "name": "Mountain Arena",
+      "theme": "high-altitude stone peak"
+    },
+    {
+      "id": "futuristic-arena",
+      "name": "Futuristic Arena",
+      "theme": "sci-fi coliseum"
+    }
+  ],
+  "gameModes": [
+    "two-player",
+    "vs-computer",
+    "practice",
+    "survival",
+    "tournament"
+  ],
+  "settings": {
+    "musicVolume": 35,
+    "sfxVolume": 55,
+    "controlTransparency": 48,
+    "buttonSize": 48,
+    "joystickSensitivity": 1.0,
+    "graphicsQuality": "high",
+    "fullscreen": true
+  }
+}

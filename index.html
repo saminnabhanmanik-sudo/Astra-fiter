@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#070b18">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>ASTRA FIGHTERS</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="game" aria-label="Astra Fighters game arena"></canvas>
+    <div id="rotate-screen">PLEASE ROTATE YOUR DEVICE TO LANDSCAPE</div>
+
+    <header id="hud">
+      <section class="fighter-hud left">
+        <div class="fighter-name" id="p1-name">NOVA</div>
+        <div class="health-track"><div id="p1-trail" class="trail"></div><div id="p1-health" class="health-fill"></div></div>
+        <div class="meter-line"><span id="p1-hp">200 / 200</span><span id="p1-points">PTS: 0</span></div>
+        <div class="stamina-track"><div id="p1-stamina" class="stamina-fill"></div></div>
+        <div class="meter-line"><span id="p1-st">100%</span><span id="p1-rounds">○ ○ ○</span></div>
+      </section>
+      <section class="center-hud">
+        <div id="round-label">ROUND 1</div>
+        <div id="timer">60</div>
+        <div id="callout">VS</div>
+      </section>
+      <section class="fighter-hud right">
+        <div class="fighter-name" id="p2-name">VOLT</div>
+        <div class="health-track"><div id="p2-trail" class="trail"></div><div id="p2-health" class="health-fill"></div></div>
+        <div class="meter-line"><span id="p2-points">PTS: 0</span><span id="p2-hp">200 / 200</span></div>
+        <div class="stamina-track"><div id="p2-stamina" class="stamina-fill"></div></div>
+        <div class="meter-line"><span id="p2-rounds">○ ○ ○</span><span id="p2-st">100%</span></div>
+      </section>
+    </header>
+
+    <div id="banner"></div>
+    <div id="combo1" class="combo left"></div>
+    <div id="combo2" class="combo right"></div>
+    <button id="settings-button" aria-label="Settings">⚙</button>
+
+    <section id="controls">
+      <div class="control-side" id="p1-controls">
+        <div class="stick" data-player="1"><i class="knob"></i></div>
+        <div class="attacks">
+          <button data-player="1" data-action="punch">□</button><button data-player="1" data-action="heavyPunch">△</button>
+          <button data-player="1" data-action="kick">×</button><button data-player="1" data-action="heavyKick">○</button>
+        </div>
+      </div>
+      <div class="control-side right-controls" id="p2-controls">
+        <div class="attacks">
+          <button data-player="2" data-action="heavyPunch">△</button><button data-player="2" data-action="punch">□</button>
+          <button data-player="2" data-action="heavyKick">○</button><button data-player="2" data-action="kick">×</button>
+        </div>
+        <div class="stick" data-player="2"><i class="knob"></i></div>
+      </div>
+    </section>
+
+    <!-- MAIN MENU -->
+    <section id="menu" class="overlay screen">
+      <div class="panel wide">
+        <div class="eyebrow">ASTRA ARCADE SYSTEM</div>
+        <h1>ASTRA FIGHTERS</h1>
+        <p>Two fighters. One arena. Three rounds.</p>
+        <div class="menu-grid">
+          <button id="m-start" class="primary">START GAME</button>
+          <button data-mode="two">TWO PLAYER</button>
+          <button data-mode="vs">VS COMPUTER</button>
+          <button data-mode="practice">PRACTICE</button>
+          <button data-mode="survival">SURVIVAL</button>
+          <button data-mode="tournament">TOURNAMENT</button>
+          <button id="m-chars">CHARACTER SELECTION</button>
+          <button id="m-arena">ARENA SELECTION</button>
+          <button id="m-settings">SETTINGS</button>
+          <button id="m-how">HOW TO PLAY</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHARACTER SELECT -->
+    <section id="select" class="overlay screen hidden">
+      <div class="sel-wrap">
+        <div class="sel-side" id="sel-p1"><div class="tag p1">PLAYER 1</div><canvas id="pv1" width="120" height="150"></canvas><div class="sname"></div><div class="sstyle"></div><div class="stats"></div><div class="sspec"></div><button class="lock" data-lock="1">LOCK IN</button></div>
+        <div class="sel-mid"><div class="sel-title">SELECT YOUR FIGHTER</div><div id="grid"></div>
+          <div class="sel-actions"><button id="s-back">BACK</button><button id="s-random">RANDOM</button><button id="s-arena">ARENA: </button><button id="s-start" class="primary">START</button></div></div>
+        <div class="sel-side" id="sel-p2"><div class="tag p2">PLAYER 2</div><canvas id="pv2" width="120" height="150"></canvas><div class="sname"></div><div class="sstyle"></div><div class="stats"></div><div class="sspec"></div><button class="lock" data-lock="2">LOCK IN</button></div>
+      </div>
+    </section>
+
+    <!-- ARENA SELECT -->
+    <section id="arenas" class="overlay screen hidden">
+      <div class="panel wide"><div class="eyebrow">CHOOSE YOUR BATTLEFIELD</div><h2>ARENA SELECTION</h2><div id="arena-grid"></div><button id="a-back" class="primary">BACK</button></div>
+    </section>
+
+    <!-- HOW TO PLAY -->
+    <section id="how" class="overlay screen hidden">
+      <div class="panel wide left-text">
+        <h2>HOW TO PLAY</h2>
+        <p><b>Touch:</b> each player has a joystick (move / jump ↑ / crouch ↓) and four buttons: □ light punch · △ heavy punch · × light kick · ○ heavy kick. Both players can play at the same time.</p>
+        <p><b>Block:</b> hold back when the enemy is close. <b>Run:</b> push the stick fully forward (or double-tap forward). <b>Dodge:</b> double-tap back (costs stamina).</p>
+        <p><b>Combos:</b> □□× , □×, ××, →□ (lunge), ←× (sweep). The third hit of a string ending in a kick is a <b>Finisher</b> (30 dmg). <b>Special:</b> ↘ + △ (costs 28 stamina).</p>
+        <p><b>Keyboard (testing):</b> P1 WASD + F G V B · P2 Arrows + J K N M.</p>
+        <p>Each round win = 5 points. Double-player matches are always exactly 3 rounds (max 15 pts).</p>
+        <button id="h-back" class="primary">BACK</button>
+      </div>
+    </section>
+
+    <!-- PAUSE -->
+    <section id="pause" class="overlay hidden">
+      <div class="panel">
+        <div class="eyebrow">MATCH PAUSED</div><h2>PAUSE MENU</h2>
+        <button id="p-resume" class="primary">RESUME</button>
+        <button id="p-pause">PAUSE</button>
+        <button id="p-restart">RESTART MATCH</button>
+        <button id="p-settings">SETTINGS</button>
+        <button id="p-exit">EXIT TO MAIN MENU</button>
+      </div>
+    </section>
+
+    <!-- CONFIRM -->
+    <section id="confirm" class="overlay hidden" style="z-index:14">
+      <div class="panel"><h2 id="c-title">RESTART MATCH?</h2><div class="row"><button id="c-yes" class="primary">YES</button><button id="c-no">NO</button></div></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="overlay hidden" style="z-index:12">
+      <div class="panel wide">
+        <h2>SETTINGS</h2>
+        <div class="settings-panel">
+          <label>Music volume <input id="s-music" type="range" min="0" max="100"></label>
+          <label>SFX volume <input id="s-sfx" type="range" min="0" max="100"></label>
+          <label>Control transparency <input id="s-opacity" type="range" min="20" max="80"></label>
+          <label>Button size <input id="s-btn" type="range" min="36" max="68"></label>
+          <label>Joystick sensitivity <input id="s-joy" type="range" min="0" max="100"></label>
+          <label>Graphics quality <select id="s-gfx"><option value="high">High</option><option value="low">Low</option></select></label>
+          <label>Match timer <select id="s-timer"><option>30</option><option>60</option><option>90</option><option>99</option></select></label>
+          <label>AI difficulty <select id="s-ai"><option value="easy">Easy</option><option value="normal">Normal</option><option value="hard">Hard</option></select></label>
+          <label class="chk"><input id="s-perf" type="checkbox"> Performance mode</label>
+          <button id="s-full">FULLSCREEN</button>
+        </div>
+        <button id="s-close" class="primary">DONE</button>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="result" class="overlay hidden top">
+      <div class="panel">
+        <div class="eyebrow" id="r-eyebrow">MATCH OVER</div>
+        <h2 id="r-title">PLAYER 1 WINS</h2>
+        <p id="r-sub"></p>
+        <div class="row"><button id="r-main" class="primary">REMATCH</button><button id="r-menu">MAIN MENU</button></div>
+      </div>
+    </section>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

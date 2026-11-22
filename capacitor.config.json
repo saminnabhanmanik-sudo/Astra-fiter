@@ -1,0 +1,8 @@
+{
+  "appId": "com.astra.fighters",
+  "appName": "ASTRA FIGHTERS",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": { "allowMixedContent": false },
+  "server": { "androidScheme": "https" }
+}
